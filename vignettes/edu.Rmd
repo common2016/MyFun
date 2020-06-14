@@ -1,0 +1,42 @@
+---
+title: "MyFun"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MyFun}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# 1. 数据集edu 
+这是一个计算分省综合教育水平的数据集。
+
+## 1.1 算法
+计算公式如下，
+\begin{align}
+edu = &illiteracy \cdot 0 + primary \cdot 6 + junior \cdot 9 + senior \cdot 12 + profession \cdot 12 + \\
+& JuniorCollege \cdot 15 + RegularCollege \cdot 16 + graduate \cdot 19
+\end{align}
+
+原始数据源自Wind数据库，其中，
+
+- $illiteracy$表示文盲和未上过学的占人口比例，
+- $primary$表示小学占人口比例，
+- $junior$表示初中占人口比例，
+- $senior$表示高中占人口比例，
+- $profession$表示中职占人口比例，
+- $JuniorCollege$表示专科占人口比例，
+- $RegularCollege$表示本科占人口比例，
+- $graduate$表示研究生占人口比例。
+
+## 1.2 其他
+数据区间是2005-2018，2015年以前，缺乏中职以上教育的数据，故计算$edu$时，均设为0。
+```{r setup}
+library(MyFun)
+```
