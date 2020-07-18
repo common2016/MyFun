@@ -9,13 +9,18 @@
 #'  \deqn{A_s = F_1 * A_{s-1} + F_2 * A_{s-2} + ... + F_p * A_{s-p}}
 #'   where A is MA coeffiencts, F is AR coeffiencts.
 #' @return a matrix which is MA coefficients
-#' @importFrom magrittr `%>%`
+#' @import magrittr
 #' @export
 #' @examples
 #' data(Canada, package = 'vars')
 #' ar <- vars::Bcoef(vars::VAR(Canada, p = 2, type = "none"))
 #' ar
-#' ar2ma(ar)
+#' ma <- ar2ma(ar)
+#' # GIRF
+#' fit <- vars::VAR(Canada, p = 2, type = "none")
+#' sig_u <- t(residuals(fit)) %*% residuals(fit)
+#' GI(ma, sig_u, imp_var = 1)
+#'
 
 ar2ma <- function(ar,p = 2,n = 11, CharValue = T){
   # get ar coefficiets
@@ -36,7 +41,7 @@ ar2ma <- function(ar,p = 2,n = 11, CharValue = T){
       sprintf('The det AR is %f',det(ar)) %>% print()
       Fchar <- Fmr[[1]]
     }else  Fchar <- matlab::zeros(nrow(Matrix::bdiag(In)),ncol(Fmr[[1]])) %>%
-        cbind(Matrix::bdiag(In),.) %>% rbind(phin,.)
+        cbind(Matrix::bdiag(In),`.`) %>% rbind(phin,`.`)
     # show max characteristic root. If it is more than 1, the var is not stationary
     sprintf('The max characteristic root is %f',max(Mod(eigen(Fchar)$values))) %>% print()
     print(Mod(eigen(Fchar)$values))

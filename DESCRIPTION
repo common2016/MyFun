@@ -16,7 +16,8 @@ Imports:
     vars,
     matlab,
     Matrix,
-    magrittr
+    magrittr,
+    dplyr
 Suggests: 
     knitr,
     rmarkdown
