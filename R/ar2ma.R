@@ -27,13 +27,16 @@ ar2ma <- function(ar,p = 2,n = 11, CharValue = T){
     # construct Phi matrix(Hamilton, 1999, p293)
     ifelse (i == 1, phin <- Fmr[[i]], phin <- cbind(phin, Fmr[[i]]))
   }
+
   # compute F matrix to get its character value
   if (CharValue){
     if (length(In) == 1){
       Fchar <- rbind(phin,cbind(In[[1]],matlab::zeros(nrow(ar))))
     }else if(length(In) == 0){
       sprintf('The det AR is %f',det(ar)) %>% print()
-    }else  Fchar <- rbind(phin, cbind(Matrix::bdiag(In),matlab::zeros(nrow(Matrix::bdiag(In)))))
+      Fchar <- Fmr[[1]]
+    }else  Fchar <- matlab::zeros(nrow(Matrix::bdiag(In)),ncol(Fmr[[1]])) %>%
+        cbind(Matrix::bdiag(In),.) %>% rbind(phin,.)
     # show max characteristic root. If it is more than 1, the var is not stationary
     sprintf('The max characteristic root is %f',max(Mod(eigen(Fchar)$values))) %>% print()
     print(Mod(eigen(Fchar)$values))
