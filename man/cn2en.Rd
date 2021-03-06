@@ -7,14 +7,17 @@
 cn2en(drv, rawtext, website = "http://fanyi.youdao.com/")
 }
 \arguments{
+\item{drv}{object from selenium module in Python. See examples.}
+
 \item{rawtext}{Chinese which is translated}
 
 \item{website}{don't change it.}
-
-\item{a}{object from selenium module in Python. See examples.}
 }
 \description{
 Translate English from Chinese
+}
+\details{
+You should install selenium module in python.
 }
 \examples{
 library(reticulate)

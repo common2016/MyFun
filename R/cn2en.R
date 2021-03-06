@@ -1,9 +1,10 @@
 #' Translate English from Chinese
 #'
-#' @param a object from selenium module in Python. See examples.
+#' @param drv object from selenium module in Python. See examples.
 #' @param rawtext Chinese which is translated
 #' @param website don't change it.
 #'
+#' @details You should install selenium module in python.
 #' @examples
 #' library(reticulate)
 #' rawtext <- '我是中国人'
@@ -28,16 +29,18 @@ cn2en <- function(drv, rawtext, website = 'http://fanyi.youdao.com/'){
   drv$find_element_by_xpath('//*[@id="inputOriginal"]')$send_keys(rawtext)
 
   # get results
-  Sys.sleep(2)
+  Sys.sleep(3)
   tran_text <- drv$find_element_by_xpath('//*[@id="transTarget"]')$text
 
   # tran_text couldn't be null
-  j <- T
-  while (j) {
-    if (nchar(tran_text) == 0){
-      Sys.sleep(2)
-      tran_text <- drv$find_element_by_xpath('//*[@id="transTarget"]')$text
-    }else break
-  }
+  if (nchar(tran_text) == 0){
+    j <- T
+    while (j) {
+      if (nchar(tran_text) == 0){
+        Sys.sleep(2)
+        tran_text <- drv$find_element_by_xpath('//*[@id="transTarget"]')$text
+        }else break
+      }
+    }
   return(tran_text)
 }
