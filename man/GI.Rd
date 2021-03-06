@@ -10,7 +10,7 @@ GI(ma, sig_u, imp_var = 1)
 \item{ma}{a list, it's MA coeffients from \code{ar2ma}}
 
 \item{sig_u}{a cov matrix from VAR models. Note the order of variables in \code{sig_u}
-is same with \code{ma}.}
+is same with one of \code{ma[[i]]}.}
 
 \item{imp_var}{a numerical scalor which specifies the impulse variable.}
 }

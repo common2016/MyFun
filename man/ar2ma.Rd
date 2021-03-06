@@ -34,7 +34,7 @@ ar
 ma <- ar2ma(ar)
 # GIRF
 fit <- vars::VAR(Canada, p = 2, type = "none")
-sig_u = t(residuals(fit)) \%*\% residuals(fit)
+sig_u <- t(residuals(fit)) \%*\% residuals(fit)
 GI(ma, sig_u, imp_var = 1)
 
 }
