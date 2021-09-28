@@ -2,4 +2,6 @@
 
 export(GI)
 export(ar2ma)
+export(text_tran)
 import(magrittr)
+importFrom(magrittr,'%>%')
