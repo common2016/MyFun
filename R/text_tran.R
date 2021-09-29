@@ -20,7 +20,9 @@ text_tran <- function(rawtext, appid, keyimp, from = 'en', to = 'zh'){
   ans <- paste(appid,rawtext,rmdnum,keyimp, sep = '')
   sn <- digest::digest(ans, algo = 'md5',serialize = FALSE)
 
-  webadd <- paste('http://api.fanyi.baidu.com/api/trans/vip/translate?q=apple&from=en&to=zh&appid=',appid,
-              '&salt=',rmdnum,'&sign=',sn,sep = '')
-  return(RCurl::getURL(webadd) %>% RJSONIO::fromJSON() %>% .[['trans_result']])
+  # GET request
+  rlt <- RCurl::getForm(feed_url,.params = list(q = rawtext, from = from, to = to,
+                                  appid = appid, salt = rmdnum, sign = sn)) %>%
+    RJSONIO::fromJSON()
+  return(rlt$trans_result)
 }
