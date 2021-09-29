@@ -21,6 +21,7 @@ text_tran <- function(rawtext, appid, keyimp, from = 'en', to = 'zh'){
   sn <- digest::digest(ans, algo = 'md5',serialize = FALSE)
 
   # GET request
+  feed_url <- 'http://api.fanyi.baidu.com/api/trans/vip/translate'
   rlt <- RCurl::getForm(feed_url,.params = list(q = rawtext, from = from, to = to,
                                   appid = appid, salt = rmdnum, sign = sn)) %>%
     RJSONIO::fromJSON()
