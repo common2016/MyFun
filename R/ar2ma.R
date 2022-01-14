@@ -22,7 +22,7 @@
 #' GI(ma, sig_u, imp_var = 1)
 #'
 
-ar2ma <- function(ar,p = 2,n = 11, CharValue = T){
+ar2ma <- function(ar,p,n = 11, CharValue = T){
   # get ar coefficiets
   Fmr <- list()
   In <- list() # eye matrix
