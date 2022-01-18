@@ -15,7 +15,7 @@
 #' data(Canada, package = 'vars')
 #' ar <- vars::Bcoef(vars::VAR(Canada, p = 2, type = "none"))
 #' ar
-#' ma <- ar2ma(ar)
+#' ma <- ar2ma(ar, p = 2)
 #' # GIRF
 #' fit <- vars::VAR(Canada, p = 2, type = "none")
 #' sig_u <- t(residuals(fit)) %*% residuals(fit)
