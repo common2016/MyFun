@@ -4,7 +4,7 @@
 \alias{ar2ma}
 \title{ar2ma}
 \usage{
-ar2ma(ar, p = 2, n = 11, CharValue = T)
+ar2ma(ar, p, n = 11, CharValue = T)
 }
 \arguments{
 \item{ar}{AR coefficients matrix which is k x kp dimenstion, k is numbers of variables,
@@ -31,7 +31,7 @@ the formula is,
 data(Canada, package = 'vars')
 ar <- vars::Bcoef(vars::VAR(Canada, p = 2, type = "none"))
 ar
-ma <- ar2ma(ar)
+ma <- ar2ma(ar, p = 2)
 # GIRF
 fit <- vars::VAR(Canada, p = 2, type = "none")
 sig_u <- t(residuals(fit)) \%*\% residuals(fit)

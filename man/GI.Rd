@@ -4,7 +4,7 @@
 \alias{GI}
 \title{Generalized IRF}
 \usage{
-GI(ma, sig_u, imp_var = 1)
+GI(ma, sig_u, imp_var = 1, unit = "sd")
 }
 \arguments{
 \item{ma}{a list, it's MA coeffients from \code{ar2ma}}
@@ -13,6 +13,9 @@ GI(ma, sig_u, imp_var = 1)
 is same with one of \code{ma[[i]]}.}
 
 \item{imp_var}{a numerical scalor which specifies the impulse variable.}
+
+\item{unit}{\code{'sd'} is one standard devtiation shock which is default,
+and \code{'one'} is one unit shock.}
 }
 \value{
 a data frame, its row is variables and its coloumn is horizons.
