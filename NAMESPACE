@@ -3,5 +3,6 @@
 export(GI)
 export(ar2ma)
 export(text_tran)
+export(tidyicio)
 import(magrittr)
 importFrom(magrittr,'%>%')
