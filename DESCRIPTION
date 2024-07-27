@@ -20,7 +20,8 @@ Imports:
     dplyr,
     RCurl,
     RJSONIO,
-    digest
+    digest,
+    stringr
 Suggests: 
     knitr,
     rmarkdown
