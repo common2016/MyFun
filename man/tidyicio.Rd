@@ -2,13 +2,7 @@
 % Please edit documentation in R/tidyicio.R
 \name{tidyicio}
 \alias{tidyicio}
-\title{Tidyicio
- @description This function is a function of the input-output table from the OECD
- involving China and Mexico in the processing trade part, re-combined into the original
- China and Mexico in the corresponding components of the table. The main operations include：
- 1. Delete CHN and MEX from the official website's csv data
- 2. Merge CN1, CN2 as CHN; MX1, MX2 as MEX, and put CHN and MEX a right positions.
- 3. Merge tax subsidies into value added, and check if rows and columns correspond one to one.}
+\title{Tidyicio}
 \usage{
 tidyicio(icio, edition = 2021)
 }
@@ -22,8 +16,7 @@ denotes the previous version of the former.}
 A modified ICIO.
 }
 \description{
-Tidyicio
- @description This function is a function of the input-output table from the OECD
+This function is a function of the input-output table from the OECD
  involving China and Mexico in the processing trade part, re-combined into the original
  China and Mexico in the corresponding components of the table. The main operations include：
  1. Delete CHN and MEX from the official website's csv data

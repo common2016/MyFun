@@ -1,5 +1,5 @@
 #' @title Tidyicio
-#'  @description This function is a function of the input-output table from the OECD
+#' @description This function is a function of the input-output table from the OECD
 #'  involving China and Mexico in the processing trade part, re-combined into the original
 #'  China and Mexico in the corresponding components of the table. The main operations include：
 #'  1. Delete CHN and MEX from the official website's csv data
