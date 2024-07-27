@@ -28,16 +28,16 @@ tidyicio <- function(icio, edition = 2021){
   if (edition == 2021){
 
     # 删掉CHN，MEX的行业，包括行和列。它们都是0.
-    icio <- icio[,!str_detect(names(icio),'CHN_[0-9]')]
-    icio <- icio[!str_detect(icio$sec,'CHN_[0-9]'),]
-    icio <- icio[,!str_detect(names(icio),'MEX_[0-9]')]
-    icio <- icio[!str_detect(icio$sec,'MEX_[0-9]'),]
+    icio <- icio[,!stringr::str_detect(names(icio),'CHN_[0-9]')]
+    icio <- icio[!stringr::str_detect(icio$sec,'CHN_[0-9]'),]
+    icio <- icio[,!stringr::str_detect(names(icio),'MEX_[0-9]')]
+    icio <- icio[!stringr::str_detect(icio$sec,'MEX_[0-9]'),]
 
     browser()
 
     # 合并CN1，CN2为CHN，MX1，MX2为MEX
-    sec <- str_split_fixed(icio$sec,'_',2) %>% .[,2] %>% unique()
-    sec <- sec[str_detect(sec,'^[A-S]|^T$')]
+    sec <- stringr::str_split_fixed(icio$sec,'_',2) %>% .[,2] %>% unique()
+    sec <- sec[stringr::str_detect(sec,'^[A-S]|^T$')]
     for (i in 1:length(sec)) {
       aggcol <- paste('CN',as.character(1:2),'_',sec[i],sep = '')
       after <- paste('CHN_',sec[i],sep = '')
@@ -48,16 +48,16 @@ tidyicio <- function(icio, edition = 2021){
     }
 
     # CHN放在KHM_97T98和HRV01T02之间，MEX放在LUX_97T98和NLD_01T02之间
-    icio <- cbind(select(icio, sec:LUX_97T98),
-                  (select(icio, CHN_01T02:MEX_97T98) %>% select(contains('MEX'))), # 插入MEX
-                  select(icio, NLD_01T02:KHM_97T98),
-                  (select(icio, CHN_01T02:MEX_97T98) %>% select(contains('CHN'))), # 插入CHN
-                  select(icio, HRV_01T02:TOTAL))
+    icio <- cbind(dplyr::select(icio, sec:LUX_97T98),
+                  (dplyr::select(icio, CHN_01T02:MEX_97T98) %>% dplyr::select(dplyr::contains('MEX'))), # 插入MEX
+                  dplyr::select(icio, NLD_01T02:KHM_97T98),
+                  (dplyr::select(icio, CHN_01T02:MEX_97T98) %>% dplyr::select(dplyr::contains('CHN'))), # 插入CHN
+                  dplyr::select(icio, HRV_01T02:TOTAL))
 
     icio <- c(1:which(icio$sec %in% 'LUX_97T98'),
-              which(str_detect(icio$sec,'MEX_[0-9]')), # 插入行MEX
+              which(stringr::str_detect(icio$sec,'MEX_[0-9]')), # 插入行MEX
               which(icio$sec %in% 'NLD_01T02'):which(icio$sec %in% 'KHM_97T98'),
-              which(str_detect(icio$sec,'CHN_[0-9]')), # 插入行CHN
+              which(stringr::str_detect(icio$sec,'CHN_[0-9]')), # 插入行CHN
               which(icio$sec %in% 'HRV_01T02'):which(icio$sec %in% 'OUTPUT')) %>% icio[.,]
 
     # 把税收补贴并入增加值
@@ -73,15 +73,15 @@ tidyicio <- function(icio, edition = 2021){
   if (edition == 2022){
 
     # 删掉CHN，MEX的行业，包括行和列。它们都是0.
-    icio <- icio[,!str_detect(names(icio),'CHN_[A-T]$|CHN_[A-T][0-9]')] # 注意避免把最终需求的CHN和MEX删掉
-    icio <- icio[!str_detect(icio$sec,'CHN_[A-T]$|CHN_[A-T][0-9]'),]
-    icio <- icio[,!str_detect(names(icio),'MEX_[A-T]$|MEX_[A-T][0-9]')]
-    icio <- icio[!str_detect(icio$sec,'MEX_[A-T]$|MEX_[A-T][0-9]'),]
+    icio <- icio[,!stringr::str_detect(names(icio),'CHN_[A-T]$|CHN_[A-T][0-9]')] # 注意避免把最终需求的CHN和MEX删掉
+    icio <- icio[!stringr::str_detect(icio$sec,'CHN_[A-T]$|CHN_[A-T][0-9]'),]
+    icio <- icio[,!stringr::str_detect(names(icio),'MEX_[A-T]$|MEX_[A-T][0-9]')]
+    icio <- icio[!stringr::str_detect(icio$sec,'MEX_[A-T]$|MEX_[A-T][0-9]'),]
 
     # browser()
     # 合并CN1，CN2为CHN，MX1，MX2为MEX
-    sec <- str_split_fixed(icio$sec,'_',2) %>% .[,2] %>% unique()
-    sec <- sec[str_detect(sec,'^[A-S]|^T$')]
+    sec <- stringr::str_split_fixed(icio$sec,'_',2) %>% .[,2] %>% unique()
+    sec <- sec[stringr::str_detect(sec,'^[A-S]|^T$')]
     for (i in 1:length(sec)) {
       aggcol <- paste('CN',as.character(1:2),'_',sec[i],sep = '')
       after <- paste('CHN_',sec[i],sep = '')
@@ -92,16 +92,16 @@ tidyicio <- function(icio, edition = 2021){
     }
 
     # CHN放在CHL_T和CIV_A01_02之间，MEX放在MAR_T和MLT_A01_02之间
-    icio <- cbind(select(icio, sec:CHL_T),
-                  (select(icio, CHN_A01_02:MEX_T) %>% select(contains('CHN'))), # 插入CHN
-                  select(icio, CIV_A01_02:MAR_T),
-                  (select(icio, CHN_A01_02:MEX_T) %>% select(contains('MEX'))), # 插入MEX
-                  select(icio, MLT_A01_02:OUT))
+    icio <- cbind(dplyr::select(icio, sec:CHL_T),
+                  (dplyr::select(icio, CHN_A01_02:MEX_T) %>% dplyr::select(dplyr::contains('CHN'))), # 插入CHN
+                  dplyr::select(icio, CIV_A01_02:MAR_T),
+                  (dplyr::select(icio, CHN_A01_02:MEX_T) %>% dplyr::select(dplyr::contains('MEX'))), # 插入MEX
+                  dplyr::select(icio, MLT_A01_02:OUT))
 
     icio <- c(1:which(icio$sec %in% 'CHL_T'),
-              which(str_detect(icio$sec,'CHN_[A-S]|CHN_T$')), # 插入行CHN
+              which(stringr::str_detect(icio$sec,'CHN_[A-S]|CHN_T$')), # 插入行CHN
               which(icio$sec %in% 'CIV_A01_02'):which(icio$sec %in% 'MAR_T'),
-              which(str_detect(icio$sec,'MEX_[A-S]|MEX_T$')), # 插入行MEX
+              which(stringr::str_detect(icio$sec,'MEX_[A-S]|MEX_T$')), # 插入行MEX
               which(icio$sec %in% 'MLT_A01_02'):which(icio$sec %in% 'OUT')) %>% icio[.,]
 
     # 把税收补贴并入增加值
