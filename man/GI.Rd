@@ -18,7 +18,7 @@ is same with one of \code{ma[[i]]}.}
 and \code{'one'} is one unit shock.}
 }
 \value{
-a data frame, its row is variables and its coloumn is horizons.
+a matrix, its row is variables and its coloumn is horizons.
 }
 \description{
 Compute GIRF of linear VAR by Koop et al. (1996)

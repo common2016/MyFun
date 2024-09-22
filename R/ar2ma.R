@@ -20,7 +20,8 @@
 #' fit <- vars::VAR(Canada, p = 2, type = "none")
 #' sig_u <- t(residuals(fit)) %*% residuals(fit)
 #' GI(ma, sig_u, imp_var = 1)
-#'
+#' # 预测第二个变量时，第一个变量所占比重
+#' GFEVD(ma, sig_u, imp_var = 1, res_var = 2)
 
 ar2ma <- function(ar,p,n = 11, CharValue = T){
   # get ar coefficiets

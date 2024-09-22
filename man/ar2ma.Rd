@@ -36,5 +36,6 @@ ma <- ar2ma(ar, p = 2)
 fit <- vars::VAR(Canada, p = 2, type = "none")
 sig_u <- t(residuals(fit)) \%*\% residuals(fit)
 GI(ma, sig_u, imp_var = 1)
-
+# 预测第二个变量时，第一个变量所占比重
+GFEVD(ma, sig_u, imp_var = 1, res_var = 2)
 }
